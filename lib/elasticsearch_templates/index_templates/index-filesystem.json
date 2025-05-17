@@ -9,12 +9,21 @@
     "mappings-final"
   ],
   "template": {
+    "settings": {
+      "index": {
+        "mapping": {
+          "total_fields": {
+            "limit": 5000
+          }
+        }
+      }
+    },
     "mappings": {
       "runtime": {
-        "filesize_vis": {
+        "file.size_vis": {
           "type": "long",
           "script": {
-            "source": "emit(doc['filesize'].value);"
+            "source": "emit(doc['file.size'].value);"
           }
         }
       }

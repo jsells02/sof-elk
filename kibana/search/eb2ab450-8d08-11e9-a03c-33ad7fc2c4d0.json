@@ -1,13 +1,23 @@
 {
   "attributes": {
     "columns": [
-      "computer",
-      "username",
-      "channel",
-      "payload"
+      "winlog.computer_name",
+      "winlog.user.name",
+      "winlog.event_id",
+      "winlog.channel",
+      "message"
     ],
     "description": "",
+    "grid": {
+      "columns": {
+        "winlog.event_id": {
+          "width": 154
+        }
+      }
+    },
+    "hideChart": false,
     "hits": 0,
+    "isTextBasedQuery": false,
     "kibanaSavedObjectMeta": {
       "searchSourceJSON": "{\"filter\":[],\"highlightAll\":true,\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\",\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"version\":true}"
     },
@@ -17,6 +27,7 @@
         "desc"
       ]
     ],
+    "timeRestore": false,
     "title": "Eventlog Discovery",
     "version": 1
   },
@@ -34,5 +45,5 @@
     }
   ],
   "type": "search",
-  "typeMigrationVersion": "8.0.0"
+  "typeMigrationVersion": "10.5.0"
 }

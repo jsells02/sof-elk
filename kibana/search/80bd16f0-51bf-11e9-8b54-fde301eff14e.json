@@ -1,12 +1,15 @@
 {
   "attributes": {
     "columns": [
-      "parentpath",
-      "filename",
-      "filesize"
+      "file.directory",
+      "file.name",
+      "file.size"
     ],
     "description": "",
+    "grid": {},
+    "hideChart": false,
     "hits": 0,
+    "isTextBasedQuery": false,
     "kibanaSavedObjectMeta": {
       "searchSourceJSON": "{\"filter\":[],\"highlightAll\":true,\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\",\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"version\":true}"
     },
@@ -16,6 +19,7 @@
         "desc"
       ]
     ],
+    "timeRestore": false,
     "title": "Filesystem Discovery",
     "version": 1
   },
@@ -33,5 +37,5 @@
     }
   ],
   "type": "search",
-  "typeMigrationVersion": "8.0.0"
+  "typeMigrationVersion": "10.5.0"
 }

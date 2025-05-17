@@ -9,75 +9,57 @@
     "mappings-ip_address",
     "mappings-geohash",
     "mappings-port",
+    "mappings-zeekuid",
     "mappings-final"
   ],
   "template": {
     "mappings": {
       "runtime": {
-        "flow_records_vis": {
+        "network.bytes": {
           "type": "long",
           "script": {
-            "source": "emit(doc['flow_records'].value);"
+            "source": "emit(doc['source.bytes'].value + doc['destination.bytes'].value);"
           }
         },
-        "in_bytes_vis": {
+        "network.bytes_vis": {
           "type": "long",
           "script": {
-            "source": "emit(doc['in_bytes'].value);"
+            "source": "emit(doc['source.bytes'].value + doc['destination.bytes'].value);"
           }
         },
-        "in_packets_vis": {
+        "network.packets": {
           "type": "long",
           "script": {
-            "source": "emit(doc['in_packets'].value);"
+            "source": "emit(doc['source.packets'].value + doc['destination.packets'].value);"
           }
         },
-        "missed_bytes_vis": {
+        "network.packets_vis": {
           "type": "long",
           "script": {
-            "source": "emit(doc['missed_bytes'].value);"
+            "source": "emit(doc['source.packets'].value + doc['destination.packets'].value);"
           }
         },
-        "out_bytes_vis": {
-          "type": "long",
+        "network.pcr": {
+          "type": "double",
           "script": {
-            "source": "emit(doc['out_bytes'].value);"
-          }
-        },
-        "out_packets_vis": {
-          "type": "long",
-          "script": {
-            "source": "emit(doc['out_packets'].value);"
-          }
-        },
-        "total_bytes": {
-          "type": "long",
-          "script": {
-            "source": "emit(doc['out_bytes'].value + doc['in_bytes'].value);"
-          }
-        },
-        "total_bytes_vis": {
-          "type": "long",
-          "script": {
-            "source": "emit(doc['out_bytes'].value + doc['in_bytes'].value);"
-          }
-        },
-        "total_packets": {
-          "type": "long",
-          "script": {
-            "source": "emit(doc['out_packets'].value + doc['in_packets'].value);"
-          }
-        },
-        "total_packets_vis": {
-          "type": "long",
-          "script": {
-            "source": "emit(doc['out_packets'].value + doc['in_packets'].value);"
+            "source": "if (doc.containsKey('source.bytes') && doc.containsKey('destination.bytes')) { long total_bytes = doc['source.bytes'].value + doc['destination.bytes'].value; if (total_bytes == 0) { emit(0); } else { emit( (float)(doc['source.bytes'].value - doc['destination.bytes'].value) / (float)total_bytes ); } }"
           }
         }
       },
       "properties": {
-        "exporter": {
-          "type": "ip"
+        "netflow": {
+          "properties": {
+            "exporter": {
+              "properties": {
+                "ip": {
+                  "type": "ip"
+                }
+              }
+            },
+            "flow_duration": {
+              "type": "double"
+            }  
+          }
         }
       }
     }
